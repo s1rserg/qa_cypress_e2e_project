@@ -38,7 +38,7 @@ describe('Article', () => {
       articlePage.typeText(article.body);
       articlePage.typeTag('Other');
 
-      articlePage.clickpublishArticleButton();
+      articlePage.clickPublishArticleButton();
 
       cy.contains('h1', article.title).should('be.visible');
     });
@@ -53,12 +53,12 @@ describe('Article', () => {
       articlePage.typeText(article.body);
       articlePage.typeTag('Other');
 
-      articlePage.clickpublishArticleButton();
+      articlePage.clickPublishArticleButton();
 
       cy.contains('a', 'Edit Article').click();
 
       articlePage.typeTitle('updated');
-      articlePage.clickpublishArticleButton();
+      articlePage.clickPublishArticleButton();
 
       cy.contains('h1', 'updated').should('be.visible');
     });
@@ -73,7 +73,7 @@ describe('Article', () => {
       articlePage.typeText(article.body);
       articlePage.typeTag('Other');
 
-      articlePage.clickpublishArticleButton();
+      articlePage.clickPublishArticleButton();
 
       cy.contains('button', 'Delete Article').click();
       cy.contains('div', 'No articles are here... yet.');

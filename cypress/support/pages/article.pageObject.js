@@ -39,7 +39,7 @@ class ArticlePageObject extends PageObject {
     this.tagsField.type(tag + '{Enter}');
   }
 
-  clickpublishArticleButton() {
+  clickPublishArticleButton() {
     this.publishArticleButton.click();
   }
 }

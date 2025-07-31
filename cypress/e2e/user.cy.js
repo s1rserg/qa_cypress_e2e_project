@@ -11,12 +11,14 @@ describe('User', () => {
 
   before(() => {
     cy.task('db:clear');
-    cy.task('generateUser').then((generateUser) => {
-      userTarget = generateUser;
+
+    cy.task('generateUser').then((generatedUser) => {
+      userTarget = generatedUser;
       cy.register(userTarget.email, userTarget.username, userTarget.password);
-      userFollower = generateUser;
-      userFollower.email += '123';
-      userFollower.username += 'follower';
+    });
+
+    cy.task('generateUser').then((generatedUser) => {
+      userFollower = generatedUser;
       cy.register(
         userFollower.email,
         userFollower.username,
@@ -25,21 +27,17 @@ describe('User', () => {
     });
   });
 
-  it('should be able to follow the another user', () => {
+  it('should be able to follow another user', () => {
     signInPage.visit();
 
     signInPage.typeEmail(userFollower.email);
     signInPage.typePassword(userFollower.password);
-
     signInPage.clickSignInBtn();
 
     cy.wait(1000);
 
-    cy.visit(`/#/@${userTarget.username.replace('follower', '')}`);
+    cy.visit(`/#/@${userTarget.username}`);
 
-    cy.contains(
-      'button',
-      `Follow ${userTarget.username.replace('follower', '')}`
-    ).click();
+    cy.contains('button', `Follow ${userTarget.username}`).click();
   });
 });
